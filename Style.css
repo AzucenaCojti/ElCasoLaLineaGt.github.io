@@ -1,0 +1,289 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom right, #f4f4f4, #d9e6f1);
+    color: #222;
+    line-height: 1.6;
+  }
+  
+  header {
+    background-color: #1b3a57;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 2s ease;
+  }
+  
+  header h1 {
+    font-size: 3rem;
+    margin: 0;
+  }
+  
+  header p {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  nav {
+    background-color: #294f6d;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+    margin: 0 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  nav a:hover {
+    background-color: #1b3a57;
+  }
+  
+  section {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    animation: slideIn 1s ease;
+  }
+  
+  section:hover {
+    transform: scale(1.05);
+  }
+  
+  section:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  @keyframes slideIn {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+  }
+  
+  h2 {
+    color: #1b3a57;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+  }
+  
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin-bottom: 2rem;
+  }
+  
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .btn {
+    display: inline-block;
+    background-color: #f4a261;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #e76f51;
+  }
+  
+  .card {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+  }
+  
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+  
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #1b3a57;
+    color: white;
+  }
+/* Línea del tiempo */
+.timeline {
+    border-left: 4px solid #1b3a57;
+    margin: 2rem 1rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+  
+  .timeline-item {
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 1rem;
+  }
+  
+  .timeline-item::before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background-color: #1b3a57;
+    border-radius: 50%;
+    position: absolute;
+    left: -11px;
+    top: 4px;
+  }
+  
+  .timeline-item .date {
+    font-weight: bold;
+    color: #1b3a57;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  #form-opinion input[type="text"],
+  #form-opinion textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: inherit;
+  }
+  
+  #form-opinion button {
+    padding: 0.7rem 1.2rem;
+    background-color: #1b3a57;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  #form-opinion button:hover {
+    background-color: #2d5b82;
+  }
+  #quiz {
+    animation: fadeInUp 1s ease;
+    background-color: #f0f8ff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .quiz-question {
+    margin-bottom: 1.5rem;
+  }
+  
+  .quiz-question p {
+    font-weight: bold;
+  }
+  
+  .quiz-question label {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .quiz-question input[type="radio"] {
+    margin-right: 0.5rem;
+  }
+  
+  .quiz-question input[type="radio"]:checked + label {
+    background-color: #dbeafe;
+  }
+  
+  button {
+    background-color: #1b3a57;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #245072;
+  }
+  
+  .quiz-resultado {
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #1b3a57;
+    animation: fadeIn 1s ease;
+  }
+  
+  /* Animaciones */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+        
