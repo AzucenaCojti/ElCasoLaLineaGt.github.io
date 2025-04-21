@@ -241,20 +241,21 @@
   const mensaje = document.getElementById('mensaje-calificacion');
   const promedioText = document.getElementById('promedio-calificacion');
 
-  // Función para cargar calificaciones del LocalStorage
+  // Verificar si el usuario ya votó
+  const yaVoto = localStorage.getItem('yaVoto') === 'true';
+
   function obtenerCalificaciones() {
     const calificaciones = localStorage.getItem('calificaciones');
     return calificaciones ? JSON.parse(calificaciones) : [];
   }
 
-  // Función para guardar una nueva calificación
   function guardarCalificacion(valor) {
     const calificaciones = obtenerCalificaciones();
     calificaciones.push(valor);
     localStorage.setItem('calificaciones', JSON.stringify(calificaciones));
+    localStorage.setItem('yaVoto', 'true'); // Marcar que ya votó
   }
 
-  // Calcular el promedio y mostrarlo
   function mostrarPromedio() {
     const calificaciones = obtenerCalificaciones();
     if (calificaciones.length === 0) {
@@ -266,34 +267,46 @@
     promedioText.textContent = `⭐ Promedio actual: ${promedio} / 5 (${calificaciones.length} votos)`;
   }
 
-  // Manejo de interacción con estrellas
+  function bloquearEstrellas() {
+    estrellas.forEach((estrella) => {
+      estrella.classList.add('disabled');
+      estrella.style.pointerEvents = 'none'; // Desactiva clics
+    });
+  }
+
+  if (yaVoto) {
+    mensaje.textContent = '¡Ya has calificado esta página!';
+    bloquearEstrellas();
+  }
+
   estrellas.forEach((estrella, index) => {
     estrella.addEventListener('mouseover', () => {
+      if (yaVoto) return;
       estrellas.forEach((s, i) => {
         s.classList.toggle('hovered', i <= index);
       });
     });
 
     estrella.addEventListener('mouseout', () => {
+      if (yaVoto) return;
       estrellas.forEach((s) => s.classList.remove('hovered'));
     });
 
     estrella.addEventListener('click', () => {
+      if (yaVoto) return;
       const calificacion = index + 1;
       guardarCalificacion(calificacion);
       estrellas.forEach((s, i) => {
         s.classList.toggle('selected', i < calificacion);
       });
       mensaje.textContent = `¡Gracias! Calificaste con ${calificacion} estrella${calificacion > 1 ? 's' : ''}.`;
+      bloquearEstrellas();
       mostrarPromedio();
     });
   });
 
-  // Mostrar promedio al cargar la página
   mostrarPromedio();
 </script>
-
-
   
 <!-- Agrega esta línea justo antes de </body> -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
