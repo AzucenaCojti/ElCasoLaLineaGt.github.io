@@ -173,6 +173,23 @@
     <p id="agradecimiento" style="display:none; margin-top: 1rem; color: green;">¡Gracias por compartir tu opinión!</p>
   </section>
 
+
+  <section class="card" id="calificacion">
+    <h2>⭐ Califica esta página</h2>
+    <p>¿Qué te pareció el contenido del sitio web?</p>
+    <div class="rating">
+
+      <p id="promedio-calificacion" style="margin-top: 0.5rem;"></p>
+
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+    <p id="mensaje-calificacion" style="margin-top: 1rem; color: green;"></p>
+  </section>
+  
   <footer style="text-align:center; padding: 1rem; background-color: #1b3a57; color: white;">
     <p>&copy; 2025 Proyecto Escolar sobre el Caso La Línea - Guatemala</p>
   </footer>
@@ -219,6 +236,64 @@
       }
     }
   </script>
+<script>
+  const estrellas = document.querySelectorAll('.star');
+  const mensaje = document.getElementById('mensaje-calificacion');
+  const promedioText = document.getElementById('promedio-calificacion');
+
+  // Función para cargar calificaciones del LocalStorage
+  function obtenerCalificaciones() {
+    const calificaciones = localStorage.getItem('calificaciones');
+    return calificaciones ? JSON.parse(calificaciones) : [];
+  }
+
+  // Función para guardar una nueva calificación
+  function guardarCalificacion(valor) {
+    const calificaciones = obtenerCalificaciones();
+    calificaciones.push(valor);
+    localStorage.setItem('calificaciones', JSON.stringify(calificaciones));
+  }
+
+  // Calcular el promedio y mostrarlo
+  function mostrarPromedio() {
+    const calificaciones = obtenerCalificaciones();
+    if (calificaciones.length === 0) {
+      promedioText.textContent = 'Aún no hay calificaciones.';
+      return;
+    }
+    const suma = calificaciones.reduce((a, b) => a + b, 0);
+    const promedio = (suma / calificaciones.length).toFixed(1);
+    promedioText.textContent = `⭐ Promedio actual: ${promedio} / 5 (${calificaciones.length} votos)`;
+  }
+
+  // Manejo de interacción con estrellas
+  estrellas.forEach((estrella, index) => {
+    estrella.addEventListener('mouseover', () => {
+      estrellas.forEach((s, i) => {
+        s.classList.toggle('hovered', i <= index);
+      });
+    });
+
+    estrella.addEventListener('mouseout', () => {
+      estrellas.forEach((s) => s.classList.remove('hovered'));
+    });
+
+    estrella.addEventListener('click', () => {
+      const calificacion = index + 1;
+      guardarCalificacion(calificacion);
+      estrellas.forEach((s, i) => {
+        s.classList.toggle('selected', i < calificacion);
+      });
+      mensaje.textContent = `¡Gracias! Calificaste con ${calificacion} estrella${calificacion > 1 ? 's' : ''}.`;
+      mostrarPromedio();
+    });
+  });
+
+  // Mostrar promedio al cargar la página
+  mostrarPromedio();
+</script>
+
+
   
 <!-- Agrega esta línea justo antes de </body> -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
